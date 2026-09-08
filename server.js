@@ -3,10 +3,12 @@ const app = express();
 const path = require('path');
 const fs = require('fs');
 const { error } = require('console');
+//used like a cache so that files are not accessed in every get request
 let highestPriceData;
 let lowestPriceData;
 let mostPopularData;
 try {
+    //used sync so that thease three files are already ready before server starts
     highestPriceData = JSON.parse(fs.readFileSync('./data/highest_price.json', 'utf8'));
     lowestPriceData = JSON.parse(fs.readFileSync('./data/lowest_price.json', 'utf-8'));
     mostPopularData = JSON.parse(fs.readFileSync('./data/most_popular.json', 'utf-8'));
@@ -27,17 +29,37 @@ app.get("/get-property", (req, res) => {
     if (numberofQuery > 1) {
         res.status(422).json({ error: "You cannot use more than one parameter" });
     }
-    let limit = Number(req.query.limit);
+    let limit = Number(req.query.limit) || 10;
     let resposeData;
     if (mostPopular) {
         responseData = {
             ...mostPopularData,
             Result: {
                 ...mostPopularData.Result,
+                Count: limit,
                 Items: mostPopularData.Result.Items.slice(0, limit)
             }
         };
-        res.json(responseData);
+    }
+    if (lowestPrice) {
+        resposeData = {
+            ...lowestPriceData,
+            Result: {
+                ...lowestPriceData.Result,
+                Count: limit,
+                Items: lowestPriceData.Result.Items.slice(0, limit)
+            }
+        }
+    }
+    if (highestPrice) {
+        resposeData = {
+            ...highestPriceData,
+            Result: {
+                ...highestPriceData.Result,
+                Count: limit,
+                Items: highestPriceData.Result.Items.slice(0, limit)
+            }
+        }
     }
     res.json(resposeData);
 });
