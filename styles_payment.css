@@ -1,0 +1,210 @@
+.site-main__payment {
+    width: 100%;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--color-body-text);
+}
+
+/* booking card */
+.booking-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-card);
+    border-radius: 12px;
+    padding: 22px 18px 10px;
+    box-shadow: 0 4px 16px var(--color-box-shadow);
+    overflow: hidden;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* price header */
+.booking-card__header {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.booking-card__price {
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--color-booking-card-price);
+}
+
+.booking-card__price-sub {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--color-text-sub);
+    letter-spacing: 0.03em;
+}
+
+/* inputs */
+.booking-card__dates {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.booking-card__input-box {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px 12px;
+    border: 1px solid var(--color-border-input);
+    border-radius: 6px;
+    background: var(--color-surface);
+    cursor: pointer;
+}
+
+.booking-card__input-box--full {
+    margin-bottom: 14px;
+}
+
+.booking-card__label {
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--color-border-input);
+    letter-spacing: 0.04em;
+    margin-bottom: 3px;
+}
+
+.booking-card__value {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--color-body-text);
+    letter-spacing: -0.01em;
+}
+
+.booking-card__chevron {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 12px;
+    pointer-events: none;
+}
+
+/* status alert */
+.booking-card__status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    background: var(--color-bg-banner);
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-banner);
+    margin-bottom: 14px;
+}
+
+.booking-card__status-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+/* price breakdown */
+.booking-card__breakdown {
+    border: 1px solid var(--color-border-breakdown);
+    border-radius: 6px;
+    padding: 12px 14px;
+    margin-bottom: 16px;
+}
+
+.booking-card__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.booking-card__row--sub {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--color-text-sub);
+    margin-bottom: 10px;
+}
+
+.booking-card__row--total {
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--color-body-text);
+}
+
+/* action button */
+.booking-card__btn {
+    width: 100%;
+    height: 48px;
+    background: var(--color-book-bg);
+    border: none;
+    border-radius: 6px;
+    color: var(--color-book-text);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    margin-bottom: 12px;
+}
+
+.booking-card__btn:hover {
+    background: var(--color-book-bg-hover);
+}
+
+/* redirect text */
+.booking-card__redirect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    color: var(--color-text-sub);
+    margin-bottom: 14px;
+}
+
+.booking-card__brand {
+    font-weight: 800;
+    color: var(--color-text-brand);
+}
+
+/* deal banner */
+.booking-card__deal-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--color-bg-banner);
+    margin: 0 -18px;
+    padding: 12px 8px;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--color-text-banner);
+    border-top: 1px solid var(--color-border-card);
+}
+
+.booking-card__fire-icon {
+    width: 16px;
+    height: 16px;
+}
+
+/* bottom banner */
+.booking-card__footer-banner {
+    background: var(--color-bg-banner);
+    border: 1px solid var(--color-border-card);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-top: 14px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-body-text);
+    line-height: 1.5;
+}
+
+.booking-card__footer-link {
+    color: var(--color-book-bg);
+    text-decoration: underline;
+}

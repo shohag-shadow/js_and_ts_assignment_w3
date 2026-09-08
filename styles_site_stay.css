@@ -1,0 +1,428 @@
+/* color variables */
+:root {
+    --color-header-bg: #16251d;
+    --color-body-text: #17231d;
+    --color-surface: #ffffff;
+    --color-primary: #80d66f;
+    --color-primary-dark: #49a94d;
+    --color-primary-light: #f3faf4;
+    --color-border: #d5dce0;
+    --color-border-light: #dce9df;
+    --color-border-dark: #999999;
+    --color-text-muted: #777777;
+    --color-text-light: #999999;
+    --color-button-text: #17351e;
+}
+
+/* stay section */
+.site-stay {
+    width: 100%;
+    margin: 0;
+}
+
+/* header */
+.site-stay__header {
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.site-stay__title {
+    margin: 8px;
+    color: var(--color-body-text);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+/* filters */
+.site-stay__filters {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.site-stay__filter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    height: 28px;
+    padding: 0 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background-color: var(--color-surface);
+    color: var(--color-body-text);
+    font-size: 9px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.site-stay__filter span {
+    width: 10px;
+    height: 10px;
+    overflow: hidden;
+    background: url("assets/icon-chevron.svg") center / 10px 10px no-repeat;
+    color: transparent;
+    font-size: 0;
+}
+
+/* main content */
+.site-stay__content {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 12px;
+}
+
+/* course grid */
+.site-stay__courses {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: calc(66.666% - 6px);
+    gap: 8px;
+}
+
+/* course card */
+.site-stay__card {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background-color: var(--color-surface);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+/* card image */
+.site-stay__card-image {
+    position: relative;
+    width: 100%;
+    height: 127px;
+    overflow: hidden;
+}
+
+.site-stay__card-image>img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* badge */
+.site-stay__card-badge {
+    position: absolute;
+    top: 9px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background-color: rgba(40, 57, 76, 0.75);
+    color: var(--color-surface);
+    font-size: 7px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+/* card actions */
+.site-stay__card-actions {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    gap: 4px;
+}
+
+.site-stay__card-actions button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    background-color: rgba(30, 45, 55, 0.45);
+    color: var(--color-surface);
+    font-size: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 13px 13px;
+    cursor: pointer;
+}
+
+.site-stay__card-actions button:nth-child(1) {
+    background-image: url("assets/icon-golf-course.svg");
+}
+
+.site-stay__card-actions button:nth-child(2) {
+    background-image: url("assets/icon-location.svg");
+}
+
+.site-stay__card-actions button:nth-child(3) {
+    background-image: url("assets/icon-heart.svg");
+}
+
+/* card body */
+.site-stay__card-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 8px 10px 9px;
+}
+
+/* rating */
+.site-stay__rating {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 6px;
+    color: var(--color-text-muted);
+    font-size: 7px;
+    line-height: 1;
+}
+
+.site-stay__rating span {
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    overflow: hidden;
+    background: url("assets/icon-star.svg") center / 11px 11px no-repeat;
+    color: transparent;
+    font-size: 0;
+}
+
+.site-stay__rating strong {
+    font-weight: 600;
+}
+
+.site-stay__rating b {
+    color: var(--color-text-light);
+    font-weight: 400;
+}
+
+/* card title */
+.site-stay__card-title {
+    margin: 0 0 5px;
+    color: var(--color-body-text);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+/* booking */
+.site-stay__booking {
+    color: var(--color-text-light);
+    font-size: 7px;
+}
+
+/* price */
+.site-stay__price {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: 2px;
+    color: #555555;
+    font-size: 9px;
+}
+
+.site-stay__price strong {
+    color: var(--color-primary-dark);
+    font-size: 11px;
+}
+
+.site-stay__price span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    overflow: hidden;
+    background: url("assets/icon-info.svg") center / 10px 10px no-repeat;
+    color: transparent;
+    font-size: 0;
+}
+
+/* details */
+.site-stay__details {
+    margin: 5px 0 4px;
+    color: var(--color-text-muted);
+    font-size: 7px;
+    line-height: 1.25;
+}
+
+/* location */
+.site-stay__location {
+    margin-top: auto;
+    color: #58635c;
+    font-size: 7px;
+    font-weight: 600;
+}
+
+/* card buttons */
+.site-stay__card-buttons {
+    display: flex;
+    gap: 7px;
+    margin-top: 8px;
+}
+
+.site-stay__card-buttons button {
+    height: 25px;
+    border-radius: 999px;
+    font-size: 7px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.site-stay__learn-more {
+    width: 50%;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    color: var(--color-text-muted);
+}
+
+.site-stay__see-dates {
+    width: 50%;
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-primary);
+    color: var(--color-button-text);
+}
+
+/* map */
+.site-stay__map {
+    position: relative;
+    width: calc(33.333% - 6px);
+    overflow: hidden;
+    border: 1px solid var(--color-border-light);
+    border-radius: 7px;
+    background-color: var(--color-map-fallback);
+    background-image: linear-gradient(28deg, transparent 46%, rgba(255, 255, 255, 0.8) 47%, rgba(255, 255, 255, 0.8) 50%, transparent 51%), linear-gradient(118deg, transparent 45%, rgba(255, 255, 255, 0.65) 46%, rgba(255, 255, 255, 0.65) 49%, transparent 50%);
+    background-size: 180px 180px, 220px 220px;
+}
+
+.site-stay__map iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 615px;
+    border: 0;
+}
+
+/* footer */
+.site-stay__footer {
+    display: flex;
+    align-items: center;
+    width: calc(66.666% - 6px);
+    margin-top: 12px;
+    min-height: 31px;
+    visibility: visible;
+}
+
+/* pagination */
+.site-stay__pagination {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    color: var(--color-text-muted);
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+.site-stay__pagination button,
+.site-stay__pagination span {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+    color: inherit;
+    font-size: inherit;
+    cursor: pointer;
+}
+
+.site-stay__pagination button:disabled {
+    color: #bbbbbb;
+    cursor: default;
+}
+
+.site-stay__pagination--active {
+    color: var(--color-primary-dark);
+    font-weight: 700;
+}
+
+/* view all */
+.site-stay__view-all {
+    margin-left: auto;
+    height: 31px;
+    padding: 0 20px;
+    border: 1px solid var(--color-border-dark);
+    border-radius: 999px;
+    background-color: var(--color-surface);
+    color: var(--color-text-muted);
+    font-size: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+/* responsive */
+@media (max-width: 767px) {
+    .site-stay__content {
+        display: block;
+    }
+
+    .site-stay__courses {
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    .site-stay__card:nth-child(n + 2) {
+        display: none;
+    }
+
+    .site-stay__card-image {
+        height: 150px;
+    }
+
+    .site-stay__map {
+        display: none;
+    }
+
+    .site-stay__footer {
+        width: 100%;
+    }
+
+    .site-stay__pagination {
+        gap: 9px;
+        font-size: 8px;
+    }
+
+    .site-stay__view-all {
+        padding-inline: 10px;
+        font-size: 7px;
+    }
+}
+
+@media (min-width: 767px) and (max-width: 1023px) {
+    .site-stay__content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .site-stay__map {
+        order: 1;
+        width: 100%;
+        height: 260px;
+    }
+
+    .site-stay__map iframe {
+        min-height: 260px;
+    }
+
+    .site-stay__courses {
+        order: 2;
+        width: 100%;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .site-stay__footer {
+        width: 100%;
+    }
+}

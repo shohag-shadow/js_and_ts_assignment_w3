@@ -1,0 +1,1367 @@
+/* css custom properties */
+:root {
+    --color-primary: #2a6b4a;
+    --color-primary-light: #f0f7f2;
+    --color-primary-dark: #1a3d2e;
+    --color-surface: #ffffff;
+    --color-border-light: #e0e8e3;
+    --color-border-dark: #b0c0b5;
+    --color-body-text: #1e2e26;
+    --color-text-muted: #5a6f64;
+    --color-button-text: #ffffff;
+    --color-pricing-blue: #e8f0fe;
+    --color-stay-accent: #4cc3e0;
+    --color-play-accent: #3fae5c;
+    --color-play-button: #7ed99b;
+    --color-weather-bg: #1e3a45;
+    --color-weather-bg-end: #2f9e73;
+    --color-header-bg: #1a2a22;
+    --color-footer-muted: rgba(255, 255, 255, 0.65);
+}
+
+/* original page styles */
+.site-main {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(250px, 1fr);
+    margin: 1%;
+    gap: 1%;
+    align-items: flex-start;
+}
+
+.site-main__info {
+    width: auto;
+}
+
+.site-main__payment {
+    width: auto;
+}
+
+.site-main__image-gallary {
+    position: relative;
+    display: flex;
+
+    gap: 1px;
+    height: clamp(220px, 30vw, 440px);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.site-main__image-gallary--main {
+    width: calc(66.666% - 0.66px);
+    height: 100%;
+    object-fit: cover;
+}
+
+.site-main__image-gallary--side {
+    width: calc(33.333% - 0.33px);
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.site-main__image-gallary--side img {
+    width: 100%;
+    height: calc(50% - 0.5px);
+    object-fit: cover;
+}
+
+.site-main__image-gallary-view-all {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 10;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 32px;
+    padding: 0 14px;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 999px;
+    background: rgba(20, 35, 28, 0.65);
+    color: #ffffff;
+    font-size: 11px;
+
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    backdrop-filter: blur(4px);
+}
+
+.site-main__image-gallary-circles {
+    display: none;
+}
+
+.mobile-pricing {
+    display: none;
+}
+
+@media (max-width: 1023px) {
+    .site-main {
+        padding-bottom: 48px;
+    }
+
+    .site-main {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .site-main__image-gallary--side {
+        display: none;
+    }
+
+    .site-main__payment {
+        display: none;
+    }
+
+    .site-main__info {
+        width: 100%;
+    }
+
+    .site-main__image-gallary--main {
+        position: relative;
+        width: calc(100% - 0.66px);
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .site-main__image-gallary {
+        height: clamp(220px, 48vw, 360px);
+    }
+
+    .site-main__image-gallary-view-all {
+        display: none;
+    }
+
+    .site-main__image-gallary-circles {
+        position: absolute;
+        left: 50%;
+        bottom: 16px;
+        z-index: 10;
+
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transform: translateX(-50%);
+        color: #ffffff;
+        font-size: 11px;
+
+        font-weight: 700;
+        text-transform: uppercase;
+        cursor: pointer;
+        gap: 5px;
+    }
+
+    .site-main__image-gallary-circles div {
+        width: 10px;
+        height: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.85);
+        border-radius: 50%;
+    }
+
+    .site-main__image-gallary-circles>:first-child {
+        background-color: var(--color-surface);
+    }
+
+    .mobile-pricing {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+        margin: 16px 1% 0;
+    }
+
+    .mobile-pricing__option {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+        border: 1px solid var(--color-border-light);
+        border-radius: 10px;
+        background: var(--color-surface);
+        text-align: left;
+    }
+
+    .mobile-pricing__header {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .mobile-pricing__icon-wrap {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .mobile-pricing__option--stay .mobile-pricing__icon-wrap {
+        background: var(--color-stay-accent);
+    }
+
+    .mobile-pricing__option--tee .mobile-pricing__icon-wrap {
+        border: 2px solid var(--color-play-accent);
+    }
+
+    .mobile-pricing__option h2 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: 0.03em;
+    }
+
+    .mobile-pricing__option--stay h2 {
+        color: var(--color-stay-accent);
+    }
+
+    .mobile-pricing__option--tee h2 {
+        color: var(--color-play-accent);
+    }
+
+    .mobile-pricing__icon {
+        width: 14px;
+        height: 14px;
+    }
+
+    .mobile-pricing__option--stay .mobile-pricing__icon {
+        filter: brightness(0) invert(1);
+    }
+
+    .mobile-pricing__option span,
+    .mobile-pricing__from span,
+    .mobile-pricing__tee-values span {
+        color: var(--color-text-muted);
+        font-size: 8px;
+        font-weight: 700;
+    }
+
+    .mobile-pricing__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .mobile-pricing__stay-values {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .mobile-pricing__stay-values span {
+        text-align: left;
+        line-height: 1.3;
+    }
+
+    .mobile-pricing__stay-values strong,
+    .mobile-pricing__from strong,
+    .mobile-pricing__tee-values strong {
+        display: block;
+        color: var(--color-body-text);
+        font-size: 17px;
+        line-height: 1;
+    }
+
+    .mobile-pricing__stay-values strong {
+        font-size: 22px;
+    }
+
+    .mobile-pricing__from {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 2px;
+        text-align: right;
+    }
+
+    .mobile-pricing__tee-values {
+        display: flex;
+        justify-content: space-between;
+        gap: 4px;
+        width: 100%;
+    }
+
+    .mobile-pricing__tee-values span {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
+        text-align: center;
+        border-right: 1px solid var(--color-border-light);
+    }
+
+    .mobile-pricing__tee-values span:last-child {
+        border-right: 0;
+    }
+
+    .mobile-pricing__tee-values small {
+        font-size: 8px;
+    }
+
+    .mobile-pricing__option button {
+        width: 100%;
+        min-height: 32px;
+        margin-top: 2px;
+        border: 0;
+        border-radius: 999px;
+        color: var(--color-button-text);
+        font-size: 9px;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+    }
+
+    .mobile-pricing__option--stay button {
+        background: var(--color-stay-accent);
+    }
+
+    .mobile-pricing__option--tee button {
+        background: var(--color-play-button);
+    }
+
+    .nearby {
+        display: none;
+    }
+}
+
+/* lower content sections */
+.page-lower {
+    grid-column: 1;
+    display: grid;
+    gap: 24px;
+    margin-top: 8px;
+    color: var(--color-body-text);
+}
+
+.page-lower h2 {
+    margin: 0 0 12px;
+    font-size: clamp(18px, 2vw, 25px);
+    line-height: 1.15;
+}
+
+.course-highlights,
+.features,
+.weather {
+    padding: 22px;
+    border: 1px solid var(--color-border-light);
+    border-radius: 8px;
+    background: var(--color-primary-light);
+}
+
+.course-highlights__grid,
+.reviews__grid,
+.weather__seasons,
+.nearby__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.course-highlights__grid article,
+.reviews__grid article,
+.weather__seasons article,
+.nearby__grid article {
+    min-width: 0;
+    padding: 14px;
+    border: 1px solid var(--color-border-light);
+    border-radius: 6px;
+    background: var(--color-surface);
+}
+
+.course-highlights h3,
+.reviews h3,
+.features h3,
+.weather h3,
+.nearby h3 {
+    margin: 4px 0 7px;
+    font-size: 14px;
+}
+
+.course-highlights p,
+.reviews p,
+.features p,
+.features li,
+.weather p,
+.nearby p {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.course-highlights__icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    font-size: 0;
+}
+
+.course-highlights__icon img {
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
+.course-highlights__links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 14px;
+    color: var(--color-body-text);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.course-highlights__links span {
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    align-items: center;
+    gap: 8px;
+}
+
+.course-highlights__links span img {
+    grid-row: 1 / span 2;
+}
+
+.course-highlights__links span strong {
+    font-size: 11px;
+    line-height: 1.2;
+}
+
+.course-highlights__links span small {
+    color: var(--color-text-muted);
+    font-size: 9px;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+.course-highlights__links img {
+    width: 26px;
+    height: 26px;
+}
+
+.section-kicker,
+.section-note {
+    margin: 0;
+    text-align: left;
+}
+
+.reviews__package {
+    display: flex;
+    align-items: baseline;
+    gap: 28px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.section-kicker {
+    color: var(--color-primary-dark);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .08em;
+}
+
+.section-note {
+    margin-bottom: 0;
+    color: var(--color-text-muted);
+    font-size: 11px;
+}
+
+.reviews__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.reviews__stars {
+    width: 60px;
+    height: 12px;
+    overflow: hidden;
+    background: url("assets/icon-star.svg") left center / 12px 12px repeat-x;
+    color: transparent;
+    font-size: 0;
+}
+
+.reviews__grid article:nth-child(3) .reviews__stars {
+    width: 48px;
+}
+
+.reviews small {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    color: var(--color-text-muted);
+    font-size: 9px;
+}
+
+.reviews small img {
+    width: 22px;
+    height: 22px;
+}
+
+.features {
+    background: transparent;
+    border: 0;
+    padding-inline: 0;
+}
+
+.features__grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 12px;
+}
+
+.features__grid article {
+    padding: 18px;
+    border: 1px solid var(--color-border-light);
+    border-radius: 6px;
+    background: var(--color-primary-light);
+}
+
+.features ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.features h4 {
+    margin: 9px 0 3px;
+    font-size: 11px;
+}
+
+/* weather */
+.weather {
+    background: var(--color-surface);
+}
+
+.weather>p {
+    margin-bottom: 12px;
+}
+
+.weather__banner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px 28px;
+    padding: 24px 28px;
+    border-radius: 10px;
+    background: linear-gradient(120deg, var(--color-weather-bg) 0%, var(--color-weather-bg-end) 100%);
+    color: var(--color-surface);
+    font-size: 10px;
+}
+
+.weather__banner span {
+    font-size: 9px;
+}
+
+.weather__banner-date {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.weather__banner-date strong {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+.weather__banner-date span {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.weather__banner-days {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 8px 16px;
+    flex: 1 1 320px;
+}
+
+.weather__banner b {
+    width: auto;
+    min-width: 32px;
+    height: auto;
+    overflow: visible;
+    font-size: 0;
+    font-weight: 400;
+    text-align: center;
+}
+
+.weather__banner b::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin: 4px auto;
+    background: url("assets/icon-cloud.svg") center / 24px 24px no-repeat;
+}
+
+.weather__current {
+    display: none;
+}
+
+.weather__banner b span {
+    display: block;
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.weather__banner small {
+    display: block;
+    margin-top: 2px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.weather__seasons {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 28px 24px;
+    margin-top: 36px;
+    border: 0;
+}
+
+.weather__seasons article {
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+.weather__seasons-icon {
+    display: block;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 14px;
+}
+
+.weather__seasons h3 {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.weather__seasons h3 small {
+    margin-left: 4px;
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-text-muted);
+}
+
+.weather__seasons strong {
+    display: block;
+    margin-top: 16px;
+    font-size: 10px;
+}
+
+.nearby__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-bottom: 10px;
+}
+
+.nearby__controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+}
+
+.nearby {
+    padding-bottom: 42px;
+}
+
+.nearby__explore,
+.nearby__arrow {
+    min-height: 25px;
+    border: 1px solid var(--color-border-dark);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-text-muted);
+    cursor: pointer;
+}
+
+.nearby__explore {
+    padding: 0 18px;
+    font-size: 8px;
+    font-weight: 700;
+}
+
+.nearby__arrow {
+    width: 25px;
+    padding: 0;
+    font-size: 18px;
+    line-height: 1;
+}
+
+.nearby__arrow--next {
+    border-color: var(--color-body-text);
+    color: var(--color-body-text);
+}
+
+.nearby__grid article {
+    overflow: hidden;
+    padding: 0 0 12px;
+}
+
+.nearby__grid img {
+    display: block;
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+}
+
+.nearby__grid h3,
+.nearby__grid p,
+.nearby__grid button {
+    margin-inline: 12px;
+}
+
+.nearby__grid p {
+    margin-bottom: 12px;
+}
+
+.nearby__grid button {
+    min-height: 25px;
+    padding: 0 10px;
+    border: 1px solid var(--color-primary-dark);
+    border-radius: 999px;
+    background: var(--color-surface);
+    color: var(--color-body-text);
+    font-size: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.nearby__grid button:last-child {
+    background: var(--color-primary);
+}
+
+/* responsive overrides */
+@media (max-width: 767px) {
+    .page-lower {
+        grid-column: 1 / -1;
+    }
+
+    .site-main {
+        margin: 3%;
+    }
+
+    .site-course-info {
+        margin-inline: 0;
+    }
+
+    .site-course-info__description {
+        display: block;
+        font-size: 10px;
+    }
+
+    .site-course-info__read-more {
+        margin-top: 0;
+    }
+
+    .site-course-info__highlights {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+        padding: 12px;
+    }
+
+    .site-course-info__title {
+        width: auto;
+        grid-column: 1 / -1;
+    }
+
+    .site-course-info__item {
+        width: auto;
+    }
+
+    .site-course-info__highlights-button {
+        width: 100%;
+        margin: 4px 0 0;
+        grid-column: 1 / -1;
+    }
+
+    .weather__seasons {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .weather__banner {
+        padding: 18px;
+        gap: 16px;
+    }
+
+    .weather__banner-days {
+        justify-content: space-between;
+        gap: 12px 14px;
+        width: 100%;
+    }
+
+    .site-stay__filters {
+        flex-wrap: wrap;
+    }
+
+    .site-stay__filter {
+        min-width: 0;
+        width: calc(50% - 3px);
+        padding-inline: 7px;
+        font-size: 8px;
+    }
+
+    .page-lower {
+        gap: 18px;
+    }
+
+    .course-highlights,
+    .features,
+    .weather {
+        padding: 14px;
+    }
+
+    .course-highlights__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .course-highlights__links,
+    .features__grid,
+    .nearby__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reviews__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mobile-pricing__option {
+        min-width: 0;
+        overflow: hidden;
+        padding: 12px;
+        gap: 10px;
+    }
+
+    .mobile-pricing__option h2 {
+        font-size: 13px;
+    }
+
+    .mobile-pricing__row {
+        justify-content: center;
+    }
+
+    .mobile-pricing__from {
+        display: none;
+    }
+
+    .mobile-pricing__stay-values {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 2px;
+    }
+
+    .mobile-pricing__stay-values strong {
+        font-size: 20px;
+    }
+
+    .mobile-pricing__stay-values span {
+        font-size: 7px;
+        line-height: 1.2;
+    }
+
+    .mobile-pricing__tee-values {
+        justify-content: center;
+    }
+
+    .mobile-pricing__tee-values span:nth-child(2),
+    .mobile-pricing__tee-values span:nth-child(3) {
+        display: none;
+    }
+
+    .mobile-pricing__tee-values span {
+        min-width: 0;
+        align-items: center;
+        text-align: center;
+        border-right: 0;
+    }
+
+    .mobile-pricing__tee-values strong {
+        font-size: 20px;
+    }
+
+    .mobile-pricing__tee-values small {
+        font-size: 7px;
+    }
+}
+
+@media (min-width: 767px) and (max-width: 1023px) {
+    .site-main__info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .site-main__image-gallary {
+        order: 1;
+    }
+
+    .mobile-pricing {
+        order: 2;
+    }
+
+    .site-course-info {
+        order: 3;
+    }
+
+    .site-stay {
+        order: 4;
+    }
+
+    .page-lower {
+        order: 5;
+    }
+
+    .course-highlights__grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .weather__seasons {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px 20px;
+    }
+
+    .site-footer {
+        margin-top: 24px;
+        padding: 30px 4% 18px;
+    }
+
+    .site-footer__inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(150px, 0.42fr);
+        align-items: start;
+        gap: 18px;
+    }
+
+    .site-footer__links {
+        width: 100%;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .site-footer__links div {
+        min-width: 0;
+        gap: 5px;
+    }
+
+    .site-footer__links a {
+        overflow-wrap: anywhere;
+        white-space: normal;
+        font-size: 7px;
+        line-height: 1.25;
+    }
+
+    .site-footer__meta {
+        min-width: 0;
+        gap: 14px;
+    }
+
+    .site-footer__region {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .site-footer__region select {
+        width: 100%;
+        min-width: 0;
+        font-size: 8px;
+        padding: 5px 20px 5px 7px;
+    }
+
+    .site-footer__brand-travelai .brand {
+        font-size: 14px;
+    }
+
+    .site-footer__brand-travelai .tagline {
+        font-size: 7px;
+    }
+
+    .site-footer__copyright {
+        margin-top: 18px;
+        padding-top: 10px;
+        font-size: 8px;
+    }
+}
+
+/* footer styles */
+.site-footer {
+    margin-top: 28px;
+    padding: 52px 4% 24px;
+    background: var(--color-header-bg);
+    background-image: url("assets/main_img.jpg");
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: multiply;
+    color: var(--color-surface);
+}
+
+.site-footer__inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* 4-column links */
+.site-footer__links {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 24px 56px;
+}
+
+.site-footer__links div {
+    display: grid;
+    align-content: start;
+    gap: 8px;
+}
+
+.site-footer__links a {
+    color: var(--color-footer-muted);
+    font-size: 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.site-footer__links a:hover {
+    color: #fff;
+}
+
+/* right-hand column: social / region / brand */
+.site-footer__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    flex-shrink: 0;
+}
+
+/* social icons */
+.site-footer__social {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.site-footer__social a {
+    display: inline-flex;
+    opacity: 0.85;
+    transition: opacity 0.2s;
+}
+
+.site-footer__social a:hover {
+    opacity: 1;
+}
+
+.site-footer__social img {
+    display: block;
+    width: 18px;
+    height: 18px;
+}
+
+/* currency & country */
+.site-footer__region {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 14px;
+}
+
+.site-footer__region label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}
+
+.site-footer__region select {
+    padding: 6px 28px 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--color-footer-muted);
+    font-size: 10px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    cursor: pointer;
+    min-width: 110px;
+}
+
+.site-footer__region select option {
+    background: #1a2a22;
+    color: #fff;
+}
+
+/* stay&play + powered by travelai */
+.site-footer__brand-travelai {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.site-footer__brand-travelai .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.site-footer__brand-travelai .brand__mark {
+    display: block;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+.site-footer__brand-travelai .divider {
+    width: 1px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.25);
+    flex-shrink: 0;
+}
+
+.site-footer__brand-travelai .tagline {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 10px;
+    letter-spacing: 0.01em;
+}
+
+.site-footer__brand-travelai .tagline .stay-play {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.site-footer__brand-travelai .tagline .powered {
+    color: var(--color-footer-muted);
+}
+
+/* copyright */
+.site-footer__copyright {
+    margin: 40px auto 0;
+    max-width: 1300px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 10px;
+    color: var(--color-footer-muted);
+    text-align: left;
+}
+
+/* footer responsive */
+@media (max-width: 1023px) {
+    .site-footer {
+        padding: 40px 4% 20px;
+    }
+
+    .site-footer__inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 28px;
+    }
+
+    .site-footer__links {
+        width: 100%;
+        gap: 18px 24px;
+    }
+
+    .site-footer__links a {
+        font-size: 9px;
+    }
+
+    .site-footer__meta {
+        gap: 20px;
+    }
+
+    .site-footer__brand-travelai .brand {
+        font-size: 20px;
+    }
+
+    .site-footer__copyright {
+        margin-top: 28px;
+    }
+}
+
+@media (max-width: 767px) {
+    .site-footer {
+        padding: 32px 5% 18px;
+        margin-top: 20px;
+    }
+
+    .site-footer__inner {
+        gap: 24px;
+    }
+
+    .site-footer__links {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px 20px;
+    }
+
+    .site-footer__links div {
+        gap: 6px;
+    }
+
+    .site-footer__links a {
+        font-size: 8px;
+        white-space: normal;
+    }
+
+    .site-footer__social {
+        gap: 16px;
+    }
+
+    .site-footer__social img {
+        width: 16px;
+        height: 16px;
+    }
+
+    .site-footer__region {
+        gap: 8px 12px;
+    }
+
+    .site-footer__region select {
+        min-width: 90px;
+        font-size: 9px;
+        padding: 5px 24px 5px 10px;
+    }
+
+    .site-footer__brand-travelai {
+        gap: 10px;
+    }
+
+    .site-footer__brand-travelai .brand {
+        font-size: 18px;
+    }
+
+    .site-footer__brand-travelai .divider {
+        height: 24px;
+    }
+
+    .site-footer__brand-travelai .tagline {
+        font-size: 9px;
+    }
+
+    .site-footer__copyright {
+        font-size: 8px;
+        padding-top: 16px;
+        margin-top: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .site-footer {
+        padding: 24px 4% 14px;
+    }
+
+    .site-footer__links {
+        gap: 16px 12px;
+    }
+
+    .site-footer__links a {
+        font-size: 7px;
+    }
+
+    .site-footer__region {
+        gap: 10px 12px;
+    }
+
+    .site-footer__brand-travelai .brand {
+        font-size: 16px;
+    }
+
+    .site-footer__brand-travelai .tagline {
+        font-size: 8px;
+    }
+}
+
+@media (min-width: 401px) and (max-width: 1023px) {
+    .site-footer {
+        margin-top: 24px;
+        padding: 30px 4% 18px;
+    }
+
+    .site-footer__inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(150px, 0.42fr);
+        align-items: start;
+        gap: 18px;
+    }
+
+    .site-footer__links {
+        width: 100%;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .site-footer__links div {
+        min-width: 0;
+        gap: 5px;
+    }
+
+    .site-footer__links a {
+        overflow-wrap: anywhere;
+        white-space: normal;
+        font-size: 7px;
+        line-height: 1.25;
+    }
+
+    .site-footer__meta {
+        min-width: 0;
+        gap: 14px;
+    }
+
+    .site-footer__region {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+
+    .site-footer__region select {
+        width: 100%;
+        min-width: 0;
+        font-size: 8px;
+        padding: 5px 20px 5px 7px;
+    }
+
+    .site-footer__brand-travelai .brand {
+        font-size: 14px;
+    }
+
+    .site-footer__brand-travelai .tagline {
+        font-size: 7px;
+    }
+
+    .site-footer__copyright {
+        margin-top: 18px;
+        padding-top: 10px;
+        font-size: 8px;
+    }
+}
