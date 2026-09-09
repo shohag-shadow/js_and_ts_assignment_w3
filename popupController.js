@@ -1,10 +1,12 @@
 const popup = {
     overlay: document.getElementById("popup-overlay"),
     content: document.getElementById("popup-content"),
+    titleEl: document.getElementById("popup-title"),
     closeButton: document.getElementById("popup-close"),
 
-    show(content) {
+    show(content, title) {
         this.content.innerHTML = content;
+        this.titleEl.textContent = title || "Popup";   // fallback if no title given
         this.overlay.classList.add("popup-overlay--active");
         document.body.style.overflow = "hidden";
     },
@@ -27,4 +29,10 @@ popup.overlay.addEventListener("click", (event) => {
     }
 });
 
-popup.show("I am a POPUP");
+// demo – try a long title that wraps
+// popup.show(
+//     "I am a POPUP with some content below.",
+//     "This is a very long popup title that will wrap onto the next line when there isn't enough room"
+// );
+
+export default popup;

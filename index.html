@@ -13,19 +13,22 @@
   <link rel="stylesheet" href="styles_course_site_info.css?v=10">
   <link rel="stylesheet" href="styles_site_stay.css?v=11">
   <link rel="stylesheet" href="styles_popup.css?v=1">
+  <link rel="stylesheet" href="style_image_gallary.css?v=1">
 </head>
 
 <body>
-  <div id="popup-overlay" class="popup-overlay popup-overlay--active">
+  <div id="popup-overlay" class="popup-overlay ">
     <div id="popup-container" class="popup-container">
-      <button id="popup-close" class="popup-close" type="button">
-        &times;
-      </button>
+      <div class="popup-header">
+        <span id="popup-title" class="popup-title">Popup</span>
+        <button id="popup-close" class="popup-close" type="button">
+          &times;
+        </button>
+      </div>
       <div id="popup-content" class="popup-content">
       </div>
     </div>
   </div>
-  <script src="popupController.js"></script>
   <!-- header -->
   <header class="site-header">
     <div class="site-header__inner">
@@ -128,7 +131,7 @@
           <img src="assets/side_img1.jpg" alt="Image of eagle creek golf club">
           <img src="assets/side_img2.jpg" alt="Image of eagle creek golf club">
         </div>
-        <button class="site-main__image-gallary-view-all" type="button">View all 20 images</button>
+        <button class="site-main__image-gallary-view-all" type="button" id="view-all-images">View all 10 images</button>
       </div>
 
       <!-- mobile pricing (stay / play) -->
@@ -828,6 +831,8 @@
     <p class="site-footer__copyright">&copy; 2025 StayAndPlay. All Rights Reserved</p>
   </footer>
 
+  <script type="module" src="popupController.js"></script>
+  <script type="module" src="gallaryController.js"></script>
 </body>
 
 </html>

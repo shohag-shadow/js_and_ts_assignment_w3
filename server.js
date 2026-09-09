@@ -1,8 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const path = require('path');
 const fs = require('fs');
 const { error } = require('console');
+//cors middlewire
+app.use(cors());
 //used like a cache so that files are not accessed in every get request
 let highestPriceData;
 let lowestPriceData;
@@ -21,7 +24,6 @@ catch (err) {
     console.error(err);
     console.log("There was error during accessing or parsing a file");
 }
-app.use(express.static(__dirname));
 app.get("/get-property", (req, res) => {
     let numberofQuery = 0;
     let mostPopular = Boolean(req.query['most-popular']);
@@ -36,7 +38,7 @@ app.get("/get-property", (req, res) => {
     let limit = Number(req.query.limit) || 10;
     let resposeData;
     if (mostPopular) {
-        responseData = {
+        resposeData = {
             ...mostPopularData,
             Result: {
                 ...mostPopularData.Result,
@@ -70,5 +72,7 @@ app.get("/get-property", (req, res) => {
 app.get("/images", (req, res) => {
     res.json(imagesRoute);
 });
+app.use(express.static(__dirname));
+
 app.listen(3000,
     () => console.log("Server running on port 3000 \n You can visit http://localhost:3000 to access it"));
