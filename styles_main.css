@@ -32,6 +32,14 @@
     width: auto;
 }
 
+.hotel-date-picker {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
 .site-main__payment {
     width: auto;
 }

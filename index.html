@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="styles_site_stay.css?v=11">
   <link rel="stylesheet" href="styles_popup.css?v=1">
   <link rel="stylesheet" href="style_image_gallary.css?v=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hotel-datepicker@4.0.0/dist/css/hotel-datepicker.css">
 </head>
 
 <body>
@@ -548,38 +549,41 @@
     <section class="site-main__payment">
       <div class="booking-card">
         <div class="booking-card__header">
-          <span class="booking-card__price">USD $600</span>
+          <span class="booking-card__price">USD $2,026</span>
           <span class="booking-card__price-sub">AVG PER NIGHT</span>
         </div>
         <div class="booking-card__dates">
-          <div class="booking-card__input-box">
+          <div id="start-date-selector" class="booking-card__input-box">
             <span class="booking-card__label">CHECK-IN</span>
-            <span class="booking-card__value">19 SEP 2025</span>
+            <span class="booking-card__value">SELECT DATE</span>
             <img class="booking-card__chevron" src="assets/dropdown.svg" alt="">
           </div>
-          <div class="booking-card__input-box">
+
+          <div id="end-date-selector" class="booking-card__input-box">
             <span class="booking-card__label">CHECK-OUT</span>
-            <span class="booking-card__value">21 SEP 2025</span>
+            <span class="booking-card__value">SELECT DATE</span>
             <img class="booking-card__chevron" src="assets/dropdown.svg" alt="">
           </div>
+          <input type="text" id="hotel-date-picker" class="hotel-date-picker">
         </div>
-        <div class="booking-card__input-box booking-card__input-box--full">
+        <div id="guest-selector" class="booking-card__input-box booking-card__input-box--full" tabindex="0"
+          aria-haspopup="dialog" aria-controls="popup-overlay">
           <span class="booking-card__label">GUESTS</span>
           <span class="booking-card__value">3 GUESTS, 1 INFANT, 1 PET</span>
           <img class="booking-card__chevron" src="assets/dropdown.svg" alt="">
         </div>
         <div class="booking-card__status">
           <img class="booking-card__status-icon" src="assets/check-circle.svg" alt="">
-          <span>Dates selected are available</span>
+          <span id="booking-status-text">Please select dates first</span>
         </div>
         <div class="booking-card__breakdown">
           <div class="booking-card__row booking-card__row--sub">
             <span>PRICE PER NIGHT</span>
-            <span>USD $600</span>
+            <span id="price-per-night">USD $2,026</span>
           </div>
           <div class="booking-card__row booking-card__row--total">
             <span>TOTAL PRICE</span>
-            <span>USD $600</span>
+            <span id="total-price">USD $0</span>
           </div>
         </div>
         <button type="button" class="booking-card__btn">CHECK AVAILABILITY</button>
@@ -871,8 +875,13 @@
 
     <p class="site-footer__copyright">&copy; 2025 StayAndPlay. All Rights Reserved</p>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/fecha@4.2.1/lib/fecha.umd.js"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/hotel-datepicker@4.0.0/dist/js/hotel-datepicker.min.js"></script>
+
+  <script src="sidePaymentCardController.js"></script>
   <script type="module" src="popupController.js"></script>
+  <script type="module" src="guestSelectorController.js"></script>
   <script type="module" src="gallaryController.js"></script>
   <script src="readMoreController.js"></script>
 </body>
