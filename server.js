@@ -7,11 +7,15 @@ const { error } = require('console');
 let highestPriceData;
 let lowestPriceData;
 let mostPopularData;
+let imagesRoute;
 try {
     //used sync so that thease three files are already ready before server starts
     highestPriceData = JSON.parse(fs.readFileSync('./data/highest_price.json', 'utf8'));
     lowestPriceData = JSON.parse(fs.readFileSync('./data/lowest_price.json', 'utf-8'));
     mostPopularData = JSON.parse(fs.readFileSync('./data/most_popular.json', 'utf-8'));
+    imagesRoute = fs.readdirSync(path.join(__dirname, 'images'));
+    imagesRoute = imagesRoute.map((route) => "/images/" + route);
+
 }
 catch (err) {
     console.error(err);
@@ -62,6 +66,9 @@ app.get("/get-property", (req, res) => {
         }
     }
     res.json(resposeData);
+});
+app.get("/images", (req, res) => {
+    res.json(imagesRoute);
 });
 app.listen(3000,
     () => console.log("Server running on port 3000 \n You can visit http://localhost:3000 to access it"));
