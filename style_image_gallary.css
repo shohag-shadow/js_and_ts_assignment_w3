@@ -49,3 +49,74 @@
 .image-gallery-scroll::-webkit-scrollbar-thumb:hover {
     background: #6b7280;
 }
+
+
+.site-main__image-gallary--left-arrow,
+.site-main__image-gallary--right-arrow,
+.site-main__image-gallary--count {
+    display: none;
+    /* hidden by default (desktop) */
+}
+
+.site-main__image-gallary--viewport {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    /* Set a fixed height or aspect ratio so the container doesn't collapse */
+    aspect-ratio: 16 / 9;
+    /* or use a specific height like 400px */
+}
+
+.site-main__image-gallary--viewport img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+@media (max-width: 768px) {
+
+    .site-main__image-gallary--left-arrow,
+    .site-main__image-gallary--right-arrow,
+    .site-main__image-gallary--count {
+        display: block;
+        /* show only on mobile/tablet */
+    }
+
+    .site-main__image-gallary--left-arrow,
+    .site-main__image-gallary--right-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        /* your existing styles for background, padding, etc. */
+    }
+
+    .site-main__image-gallary--left-arrow {
+        left: 4px;
+    }
+
+    .site-main__image-gallary--right-arrow {
+        right: 4px;
+    }
+
+    .site-main__image-gallary--count {
+        position: absolute;
+        bottom: 16px;
+        right: 16px;
+        z-index: 2;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.6);
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 14px;
+    }
+
+
+}
