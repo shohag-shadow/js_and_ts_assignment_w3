@@ -156,12 +156,23 @@ function updateMap() {
 }
 
 function updateCarousel() {
-    const position = document.querySelector("[data-carousel-position]");
     const total = Math.min(currentCards.length, 4);
     cardWrapper.querySelectorAll(".site-stay__card").forEach((card, index) => {
         card.classList.toggle("site-stay__card--carousel-active", index === currentSlide);
     });
-    if (position) position.textContent = `${currentSlide + 1} / ${total || 1}`;
+    document.querySelectorAll("[data-carousel-dot]").forEach((dot, index) => {
+        dot.hidden = index >= total;
+        const isActive = index === currentSlide;
+        dot.classList.toggle("site-stay__carousel-dot--active", isActive);
+        dot.setAttribute("aria-current", isActive ? "true" : "false");
+    });
+}
+
+function goToSlide(index) {
+    const total = Math.min(currentCards.length, 4);
+    if (!total) return;
+    currentSlide = ((index % total) + total) % total;
+    updateCarousel();
 }
 
 function loadGoogleMap() {
@@ -180,10 +191,24 @@ function loadGoogleMap() {
     }).catch(error => console.error("Google Maps error:", error));
 }
 
-document.querySelectorAll("[data-carousel-action]").forEach(button => button.addEventListener("click", () => {
-    currentSlide = button.dataset.carouselAction === "next" ? Math.min(currentSlide + 1, Math.min(currentCards.length, 4) - 1) : Math.max(currentSlide - 1, 0);
-    updateCarousel();
+document.querySelectorAll("[data-carousel-dot]").forEach(dot => dot.addEventListener("click", () => {
+    goToSlide(Number(dot.dataset.carouselDot));
 }));
+
+let swipeStartX = 0;
+let swipeStartY = 0;
+cardWrapper.addEventListener("touchstart", event => {
+    swipeStartX = event.changedTouches[0].screenX;
+    swipeStartY = event.changedTouches[0].screenY;
+}, { passive: true });
+cardWrapper.addEventListener("touchend", event => {
+    const deltaX = event.changedTouches[0].screenX - swipeStartX;
+    const deltaY = event.changedTouches[0].screenY - swipeStartY;
+    const minSwipeDistance = 40;
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > minSwipeDistance) {
+        goToSlide(currentSlide + (deltaX < 0 ? 1 : -1));
+    }
+}, { passive: true });
 
 querySelector.addEventListener("change", querySelectorHandler);
 querySelectorHandler();
