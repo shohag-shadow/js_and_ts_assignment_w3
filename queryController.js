@@ -8,7 +8,11 @@ const fallbackImages = [
     "assets/main_img.jpg"
 ];
 const propertyImageBaseUrl = "https://beta.imgservice.rentbyowner.com/640x300/";
-const markerColors = ["#49a94d", "#168aad", "#e76f51", "#9b5de5", "#f4a261", "#d62828"];
+const markerIcons = {
+    default: "assets/map-marker.svg",
+    selected: "assets/map-marker-selected.svg"
+};
+const markerSize = { width: 32, height: 40 };
 const mapState = { instance: null, markers: [], selectedId: null };
 let currentCards = [];
 let currentSlide = 0;
@@ -118,24 +122,31 @@ function bindCardEvents() {
 function selectCard(id) {
     mapState.selectedId = id;
     cardWrapper.querySelectorAll(".site-stay__card").forEach(card => card.classList.toggle("site-stay__card--selected", card.dataset.propertyId === id));
-    mapState.markers.forEach(marker => marker.setIcon(markerIcon(marker.propertyId === id ? marker.color : "#6b7280", marker.propertyId === id ? 1.25 : 1)));
+    mapState.markers.forEach(marker => marker.setIcon(markerIcon(marker.propertyId === id)));
     const marker = mapState.markers.find(item => item.propertyId === id);
     if (marker && mapState.instance) mapState.instance.panTo(marker.getPosition());
 }
 
-function markerIcon(color, scale) {
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40"><path fill="${color}" stroke="white" stroke-width="2" d="M16 2C8.3 2 2 8.3 2 16c0 10 14 21 14 21s14-11 14-21C30 8.3 23.7 2 16 2z"/><circle cx="16" cy="16" r="5" fill="white"/></svg>`;
-    return { url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`, scaledSize: new google.maps.Size(32 * scale, 40 * scale), anchor: new google.maps.Point(16 * scale, 38 * scale) };
+function markerIcon(selected, scale = 1) {
+    return {
+        url: selected ? markerIcons.selected : markerIcons.default,
+        scaledSize: new google.maps.Size(markerSize.width * scale, markerSize.height * scale),
+        anchor: new google.maps.Point((markerSize.width / 2) * scale, (markerSize.height - 2) * scale)
+    };
 }
 
 function updateMap() {
     if (!mapState.instance || !currentCards.length) return;
     mapState.markers.forEach(marker => marker.setMap(null));
-    mapState.markers = currentCards.map((item, index) => {
+    mapState.markers = currentCards.map(item => {
         const position = { lat: Number(item.GeoInfo?.Lat), lng: Number(item.GeoInfo?.Lng) };
-        const marker = new google.maps.Marker({ map: mapState.instance, position, title: item.Property?.PropertyName || "Stay", icon: markerIcon(markerColors[index], 1) });
+        const marker = new google.maps.Marker({
+            map: mapState.instance,
+            position,
+            title: item.Property?.PropertyName || "Stay",
+            icon: markerIcon(mapState.selectedId === item.ID)
+        });
         marker.propertyId = item.ID;
-        marker.color = markerColors[index];
         marker.addListener("click", () => selectCard(item.ID));
         return marker;
     });
