@@ -209,6 +209,20 @@
     padding: 12px 16px 16px;
 }
 
+#datepicker-hotel-date-picker {
+    position: fixed !important;
+    box-sizing: border-box;
+    z-index: 10001;
+}
+
+@media (max-width: 600px) {
+    .popup-overlay--datepicker .popup-container {
+        width: calc(100% - 16px);
+        max-height: calc(100vh - 16px);
+        padding: 0.75rem;
+    }
+}
+
 .datepicker-actions__button {
     border: 1px solid var(--color-border-input);
     border-radius: 4px;

@@ -122,9 +122,8 @@
           <img class="site-main__image-gallary--main" src="assets/main_img.jpg"
             alt="Eagle Creek Golf Club course beside a calm water feature">
         </div>
-        <div class="site-main__image-gallary-circles">
-          <div></div>
-          <div></div>
+        <div id="image-carousol-wrapper" class="site-main__image-gallary-circles">
+          <div class="site-main__image-gallary-circles--active"></div>
           <div></div>
           <div></div>
           <div></div>
@@ -286,16 +285,17 @@
               2 BEDROOM
               <span aria-hidden="true">⌄</span>
             </button>
-            <button class="site-stay__filter" type="button">
-              MOST POPULAR
-              <span aria-hidden="true">⌄</span>
-            </button>
+            <select name="query-selector" id="query-selector" class="site-stay__filter">
+              <option value=" most-popular">MOST POPULAR</option>
+              <option value="lowest-price">LOWEST PRICE</option>
+              <option value="highest-price">HIGHEST PRICE</option>
+            </select>
           </div>
         </div>
 
         <div class="site-stay__content">
           <!-- course cards -->
-          <div class="site-stay__courses">
+          <div id="stay-card-wrapper" class="site-stay__courses">
             <!-- card 01 -->
             <article class="site-stay__card">
               <div class="site-stay__card-image">
@@ -519,12 +519,15 @@
             </article>
           </div>
 
+          <div class="site-stay__carousel-controls">
+            <button type="button" data-carousel-action="previous" aria-label="Previous stay">&#8249;</button>
+            <span data-carousel-position>1 / 4</span>
+            <button type="button" data-carousel-action="next" aria-label="Next stay">&#8250;</button>
+          </div>
+
           <!-- map -->
           <div class="site-stay__map">
-            <iframe src="https://www.google.com/maps?q=Eagle+Creek+Golf+Club+Orlando+Florida&output=embed"
-              title="Map showing Eagle Creek Golf Club and nearby places to stay" loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
+            <div id="stay-map" role="application" aria-label="Map showing places to stay"></div>
           </div>
         </div>
 
@@ -569,7 +572,7 @@
         <div id="guest-selector" class="booking-card__input-box booking-card__input-box--full" tabindex="0"
           aria-haspopup="dialog" aria-controls="popup-overlay">
           <span class="booking-card__label">GUESTS</span>
-          <span class="booking-card__value">3 GUESTS, 1 INFANT, 1 PET</span>
+          <span class="booking-card__value">1 GUEST, 0 INFANT, 0 PET</span>
           <img class="booking-card__chevron" src="assets/dropdown.svg" alt="">
         </div>
         <div class="booking-card__status">
@@ -880,6 +883,7 @@
   <script src="https://cdn.jsdelivr.net/npm/hotel-datepicker@4.0.0/dist/js/hotel-datepicker.min.js"></script>
 
   <script src="sidePaymentCardController.js"></script>
+  <script src="queryController.js"></script>
   <script type="module" src="popupController.js"></script>
   <script type="module" src="guestSelectorController.js"></script>
   <script type="module" src="gallaryController.js"></script>

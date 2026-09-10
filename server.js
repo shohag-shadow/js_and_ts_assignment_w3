@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+require('dotenv').config();
 const app = express();
 const path = require('path');
 const fs = require('fs');
@@ -71,6 +72,9 @@ app.get("/get-property", (req, res) => {
 });
 app.get("/images", (req, res) => {
     res.json(imagesRoute);
+});
+app.get("/config/maps", (req, res) => {
+    res.json({ apiKey: process.env.GOOGLE_MAPS_API_KEY || "" });
 });
 app.use(express.static(__dirname));
 

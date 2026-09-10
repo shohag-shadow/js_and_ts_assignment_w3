@@ -3,9 +3,9 @@ import popup from "./popupController.js";
 const guestSelector = document.getElementById("guest-selector");
 const guestValue = guestSelector.querySelector(".booking-card__value");
 const guests = {
-    guests: 3,
-    infants: 1,
-    pets: 1
+    guests: 1,
+    infants: 0,
+    pets: 0
 };
 
 const guestTypes = [

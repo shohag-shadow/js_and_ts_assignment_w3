@@ -47,7 +47,7 @@
     justify-content: space-between;
     gap: 10px;
     height: 28px;
-    padding: 0 12px;
+    padding: 2 12px;
     border: 1px solid var(--color-border);
     border-radius: 999px;
     background-color: var(--color-surface);
@@ -92,6 +92,11 @@
     border-radius: 8px;
     background-color: var(--color-surface);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+}
+
+.site-stay__card--selected {
+    border-color: var(--color-primary-dark);
+    box-shadow: 0 0 0 2px var(--color-primary-dark), 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
 /* card image */
@@ -163,6 +168,14 @@
 
 .site-stay__card-actions button:nth-child(3) {
     background-image: url("assets/icon-heart.svg");
+}
+
+.site-stay__card-actions button.is-favorite {
+    background-image: none;
+    background-color: var(--color-primary-dark);
+    color: var(--color-surface);
+    font-size: 14px;
+    line-height: 1;
 }
 
 /* card body */
@@ -308,6 +321,15 @@
     border: 0;
 }
 
+#stay-map {
+    width: 100%;
+    height: 615px;
+}
+
+.site-stay__carousel-controls {
+    display: none;
+}
+
 /* footer */
 .site-stay__footer {
     display: flex;
@@ -369,12 +391,20 @@
     }
 
     .site-stay__courses {
+        display: flex;
         width: 100%;
-        grid-template-columns: 1fr;
+        overflow: hidden;
+        gap: 0;
+        transform: translateX(0);
     }
 
-    .site-stay__card:nth-child(n + 2) {
+    .site-stay__card {
+        flex: 0 0 100%;
         display: none;
+    }
+
+    .site-stay__card--carousel-active {
+        display: flex;
     }
 
     .site-stay__card-image {
@@ -383,6 +413,34 @@
 
     .site-stay__map {
         display: none;
+    }
+
+    .site-stay__carousel-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .site-stay__carousel-controls button {
+        width: 28px;
+        height: 28px;
+        border: 1px solid var(--color-border);
+        border-radius: 50%;
+        background: var(--color-surface);
+        color: var(--color-body-text);
+        font-size: 20px;
+        line-height: 1;
+        cursor: pointer;
+    }
+
+    .site-stay__carousel-controls span {
+        min-width: 40px;
+        color: var(--color-text-muted);
+        font-size: 10px;
+        text-align: center;
     }
 
     .site-stay__footer {
@@ -414,6 +472,10 @@
 
     .site-stay__map iframe {
         min-height: 260px;
+    }
+
+    #stay-map {
+        height: 260px;
     }
 
     .site-stay__courses {

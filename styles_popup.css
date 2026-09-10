@@ -76,6 +76,26 @@
     width: 100%;
 }
 
+.popup-overlay--datepicker .popup-container {
+    width: min(600px, calc(100% - 24px));
+    max-width: 600px;
+    max-height: calc(100vh - 24px);
+    padding: 1.25rem;
+}
+
+.popup-overlay--datepicker #datepicker-hotel-date-picker {
+    position: relative !important;
+    top: auto !important;
+    left: auto !important;
+    width: min(560px, 100%) !important;
+    max-width: 100%;
+    max-height: calc(100vh - 120px);
+    margin: 0 auto;
+    overflow: auto;
+    transform: none;
+    z-index: auto;
+}
+
 .guest-selector {
     display: grid;
     gap: 1rem;

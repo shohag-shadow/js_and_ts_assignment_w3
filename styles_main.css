@@ -167,7 +167,7 @@
         border-radius: 50%;
     }
 
-    .site-main__image-gallary-circles>:first-child {
+    .site-main__image-gallary-circles--active {
         background-color: var(--color-surface);
     }
 

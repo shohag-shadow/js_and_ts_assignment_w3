@@ -28,6 +28,7 @@ const hotelDatePicker = new HotelDatepicker(
         startDate: today,
         selectForward: true,
         autoClose: false,
+        container: document.body,
         format: "YYYY-MM-DD",
 
         onOpenDatepicker: function () {
@@ -59,14 +60,48 @@ const hotelDatePicker = new HotelDatepicker(
 );
 
 
-startDateSelector.addEventListener("click", () => {
-    hotelDatePicker.openDatepicker();
+startDateSelector.addEventListener("click", (event) => {
+    openDatepicker(event);
 });
 
 
 
-endDateSelector.addEventListener("click", () => {
-    hotelDatePicker.openDatepicker();
+endDateSelector.addEventListener("click", (event) => {
+    openDatepicker(event);
+});
+
+function openDatepicker(clickEvent) {
+    hotelDatePicker.openDatepicker(clickEvent);
+    const datepicker = document.getElementById("datepicker-hotel-date-picker");
+    if (datepicker) {
+        positionDatepicker(datepicker, clickEvent);
+    }
+}
+
+function positionDatepicker(datepicker, clickEvent) {
+    const padding = 12;
+    const gap = 8;
+    const left = Math.min(
+        Math.max(clickEvent.clientX - datepicker.offsetWidth, padding),
+        window.innerWidth - datepicker.offsetWidth - padding
+    );
+    const top = Math.min(
+        Math.max(clickEvent.clientY + gap, padding),
+        window.innerHeight - datepicker.offsetHeight - padding
+    );
+
+    datepicker.style.left = `${left}px`;
+    datepicker.style.top = `${top}px`;
+}
+
+document.addEventListener("click", (event) => {
+    const datepicker = document.getElementById("datepicker-hotel-date-picker");
+    const isDatepickerClick = datepicker && datepicker.contains(event.target);
+    const isDateTriggerClick = startDateSelector.contains(event.target) || endDateSelector.contains(event.target);
+
+    if (datepicker && !isDatepickerClick && !isDateTriggerClick) {
+        hotelDatePicker.closeDatepicker();
+    }
 });
 
 
@@ -91,26 +126,30 @@ function calculateTotal(startDateString, endDateString) {
 
 function addDatepickerActions() {
     const datepicker = document.getElementById("datepicker-hotel-date-picker");
-    if (!datepicker || datepicker.querySelector(".datepicker-actions")) {
+    if (!datepicker) {
         return;
     }
 
-    const actions = document.createElement("div");
-    actions.className = "datepicker-actions";
-    actions.innerHTML = `
-        <button type="button" class="datepicker-actions__button" data-datepicker-action="skip">Skip</button>
-        <button type="button" class="datepicker-actions__button datepicker-actions__button--primary"
-            data-datepicker-action="continue" disabled>Continue</button>
-    `;
-    datepicker.appendChild(actions);
+    let actions = datepicker.querySelector(".datepicker-actions");
+    if (!actions) {
+        actions = document.createElement("div");
+        actions.className = "datepicker-actions";
+        actions.innerHTML = `
+            <button type="button" class="datepicker-actions__button" data-datepicker-action="skip">Skip</button>
+            <button type="button" class="datepicker-actions__button datepicker-actions__button--primary"
+                data-datepicker-action="continue" disabled>Continue</button>
+        `;
+        datepicker.appendChild(actions);
 
-    actions.addEventListener("click", (event) => {
-        const action = event.target.dataset.datepickerAction;
-        if (action === "skip") {
-            hotelDatePicker.closeDatepicker();
-        }
-        if (action === "continue" && datePickerInput.value.includes(" - ")) {
-            hotelDatePicker.closeDatepicker();
-        }
-    });
+        actions.addEventListener("click", (event) => {
+            const action = event.target.dataset.datepickerAction;
+            if (action === "skip") {
+                hotelDatePicker.closeDatepicker();
+            }
+            if (action === "continue" && datePickerInput.value.includes(" - ")) {
+                hotelDatePicker.closeDatepicker();
+            }
+        });
+    }
+
 }

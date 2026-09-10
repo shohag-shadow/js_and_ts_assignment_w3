@@ -1,18 +1,30 @@
 const popup = {
     overlay: document.getElementById("popup-overlay"),
+    container: document.getElementById("popup-container"),
     content: document.getElementById("popup-content"),
     titleEl: document.getElementById("popup-title"),
     closeButton: document.getElementById("popup-close"),
 
     show(content, title) {
         this.content.innerHTML = content;
+        this.overlay.classList.remove("popup-overlay--datepicker");
         this.titleEl.textContent = title || "Popup";   // fallback if no title given
         this.overlay.classList.add("popup-overlay--active");
         document.body.style.overflow = "hidden";
     },
 
     close() {
+        if (typeof this.beforeClose === "function") {
+            this.beforeClose();
+        }
+
+        const datepicker = this.content.querySelector("#datepicker-hotel-date-picker");
+        if (datepicker) {
+            document.body.appendChild(datepicker);
+        }
+
         this.overlay.classList.remove("popup-overlay--active");
+        this.overlay.classList.remove("popup-overlay--datepicker");
         this.content.innerHTML = "";
         console.log("close clicked");
         document.body.style.overflow = "";
