@@ -474,6 +474,11 @@
         display: flex;
     }
 
+    .site-stay__card--selected {
+        border-color: var(--color-border);
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    }
+
     .site-stay__card--carousel-animating {
         transition: transform 0.3s ease;
     }

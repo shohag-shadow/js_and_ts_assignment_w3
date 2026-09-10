@@ -21,7 +21,7 @@ cp .env.example .env
 # GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
 ```
 
-The app runs without a Maps key — only the map on the stay section is skipped if the key is missing or empty.
+The app runs without a Maps key — only the map on the stay section will not work.
 
 ## Run the project
 
