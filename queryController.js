@@ -155,24 +155,74 @@ function updateMap() {
     mapState.instance.fitBounds(bounds, 50);
 }
 
-function updateCarousel() {
+let carouselSlideTimer = null;
+
+function updateCarousel(direction) {
     const total = Math.min(currentCards.length, 4);
-    cardWrapper.querySelectorAll(".site-stay__card").forEach((card, index) => {
-        card.classList.toggle("site-stay__card--carousel-active", index === currentSlide);
-    });
+    const cards = [...cardWrapper.querySelectorAll(".site-stay__card")];
+
+    if (carouselSlideTimer) {
+        clearTimeout(carouselSlideTimer);
+        carouselSlideTimer = null;
+    }
+    cards.forEach(card => card.classList.remove(
+        "site-stay__card--carousel-animating",
+        "site-stay__card--carousel-in",
+        "site-stay__card--carousel-in-right",
+        "site-stay__card--carousel-in-left",
+        "site-stay__card--carousel-out-left",
+        "site-stay__card--carousel-out-right"
+    ));
+
     document.querySelectorAll("[data-carousel-dot]").forEach((dot, index) => {
         dot.hidden = index >= total;
         const isActive = index === currentSlide;
         dot.classList.toggle("site-stay__carousel-dot--active", isActive);
         dot.setAttribute("aria-current", isActive ? "true" : "false");
     });
+
+    if (!direction || !window.matchMedia("(max-width: 767px)").matches) {
+        cards.forEach((card, index) => card.classList.toggle("site-stay__card--carousel-active", index === currentSlide));
+        return;
+    }
+
+    const outgoing = cards.find(card => card.classList.contains("site-stay__card--carousel-active")) || cards[0];
+    const incoming = cards[currentSlide];
+    if (incoming === outgoing) return;
+
+    incoming.classList.add("site-stay__card--carousel-active", "site-stay__card--carousel-animating", "site-stay__card--carousel-in");
+    incoming.classList.add(direction === "next" ? "site-stay__card--carousel-in-right" : "site-stay__card--carousel-in-left");
+    outgoing.classList.add("site-stay__card--carousel-animating");
+
+    void cardWrapper.offsetWidth;
+
+    incoming.classList.remove("site-stay__card--carousel-in-right", "site-stay__card--carousel-in-left");
+    outgoing.classList.add(direction === "next" ? "site-stay__card--carousel-out-left" : "site-stay__card--carousel-out-right");
+
+    carouselSlideTimer = setTimeout(() => {
+        carouselSlideTimer = null;
+        cards.forEach((card, index) => {
+            card.classList.toggle("site-stay__card--carousel-active", index === currentSlide);
+            card.classList.remove(
+                "site-stay__card--carousel-animating",
+                "site-stay__card--carousel-in",
+                "site-stay__card--carousel-out-left",
+                "site-stay__card--carousel-out-right"
+            );
+        });
+    }, 300);
 }
 
 function goToSlide(index) {
     const total = Math.min(currentCards.length, 4);
     if (!total) return;
-    currentSlide = ((index % total) + total) % total;
-    updateCarousel();
+    const wrappedIndex = ((index % total) + total) % total;
+    if (wrappedIndex === currentSlide) return;
+    const forwardDistance = (wrappedIndex - currentSlide + total) % total;
+    const backwardDistance = (currentSlide - wrappedIndex + total) % total;
+    const direction = forwardDistance <= backwardDistance ? "next" : "prev";
+    currentSlide = wrappedIndex;
+    updateCarousel(direction);
 }
 
 function loadGoogleMap() {

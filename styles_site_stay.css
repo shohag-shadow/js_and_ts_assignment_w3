@@ -392,6 +392,7 @@
 
     .site-stay__courses {
         display: flex;
+        position: relative;
         width: 100%;
         overflow: hidden;
         gap: 0;
@@ -405,6 +406,33 @@
 
     .site-stay__card--carousel-active {
         display: flex;
+    }
+
+    .site-stay__card--carousel-animating {
+        transition: transform 0.3s ease;
+    }
+
+    .site-stay__card--carousel-in {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .site-stay__card--carousel-in-right {
+        transform: translateX(100%);
+    }
+
+    .site-stay__card--carousel-in-left {
+        transform: translateX(-100%);
+    }
+
+    .site-stay__card--carousel-out-left {
+        transform: translateX(-100%);
+    }
+
+    .site-stay__card--carousel-out-right {
+        transform: translateX(100%);
     }
 
     .site-stay__card-image {
