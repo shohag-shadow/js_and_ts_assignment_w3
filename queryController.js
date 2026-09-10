@@ -110,8 +110,11 @@ function bindCardEvents() {
             const favorites = getFavorites();
             favorites.has(id) ? favorites.delete(id) : favorites.add(id);
             saveFavorites(favorites);
-            const item = currentCards.find(cardData => cardData.ID === id);
-            card.outerHTML = cardMarkup(item, currentCards.indexOf(item), favorites);
+            const button = event.target.closest("[data-favorite]");
+            const favorite = favorites.has(id);
+            button.classList.toggle("is-favorite", favorite);
+            button.textContent = favorite ? "♥" : "♡";
+            button.setAttribute("aria-label", favorite ? "Remove from favorites" : "Add to favorites");
             return;
         }
 
