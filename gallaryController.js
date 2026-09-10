@@ -13,6 +13,12 @@ let images = [];
 let activeImage = 0;
 let isAnimating = false;
 
+const DOTS_VISIBLE = 5;
+const PINNED_SLOT = 2;
+const DOT_SIZE = 8;
+const DOT_GAP = 6;
+const dotSlotWidth = DOT_SIZE + DOT_GAP;
+
 fetch('http://localhost:3000/images')
     .then(response => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
@@ -21,6 +27,7 @@ fetch('http://localhost:3000/images')
     .then(data => {
         images = data;
         attachEventListeners();
+        renderCarouselDots();
         updateCounter();
     })
     .catch(error => {
@@ -74,8 +81,65 @@ function updateCounter() {
     }
 }
 
+function renderCarouselDots() {
+    const track = document.getElementById('carouselTrack');
+    if (!track) return;
+
+    const wrapper = track.parentElement;
+    wrapper.style.setProperty('--dot-size', `${DOT_SIZE}px`);
+    wrapper.style.setProperty('--dot-gap', `${DOT_GAP}px`);
+
+    const visibleCount = Math.min(DOTS_VISIBLE, images.length);
+    wrapper.style.width = `${(dotSlotWidth * visibleCount) - DOT_GAP}px`;
+    wrapper.style.height = `${DOT_SIZE * 1.5}px`;
+
+    track.innerHTML = '';
+    images.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.className = 'site-main__image-gallary-circles__dot';
+        dot.dataset.index = idx;
+        dot.addEventListener('click', () => goToImageIndex(idx));
+        track.appendChild(dot);
+    });
+
+    updateCarouselDots();
+}
+
+function updateCarouselDots(prevActiveImage) {
+    const track = document.getElementById('carouselTrack');
+    if (!track || !images.length) return;
+
+    const dots = track.children;
+    const total = images.length;
+
+    const windowStart = Math.min(
+        Math.max(activeImage - PINNED_SLOT, 0),
+        Math.max(total - DOTS_VISIBLE, 0)
+    );
+
+    const wrapped = prevActiveImage !== undefined &&
+        Math.abs(activeImage - prevActiveImage) > 1;
+
+    const offset = -windowStart * dotSlotWidth;
+
+    if (wrapped) {
+        track.style.transition = 'none';
+        track.style.transform = `translateX(${offset}px)`;
+        void track.offsetWidth;
+        track.style.transition = '';
+    } else {
+        track.style.transform = `translateX(${offset}px)`;
+    }
+
+    for (let idx = 0; idx < dots.length; idx++) {
+        dots[idx].classList.toggle('site-main__image-gallary-circles--active', idx === activeImage);
+    }
+}
+
 function goToImage(direction) {
     if (isAnimating || !images.length) return;
+
+    const prevActiveImage = activeImage;
 
     if (direction) {
         activeImage = (activeImage + 1) % images.length;
@@ -85,6 +149,19 @@ function goToImage(direction) {
 
     changeMainImage(images[activeImage], direction);
     updateCounter();
+    updateCarouselDots(prevActiveImage);
+}
+
+function goToImageIndex(targetIndex) {
+    if (isAnimating || !images.length || targetIndex === activeImage) return;
+
+    const direction = targetIndex > activeImage;
+    const prevActiveImage = activeImage;
+
+    activeImage = targetIndex;
+    changeMainImage(images[activeImage], direction);
+    updateCounter();
+    updateCarouselDots(prevActiveImage);
 }
 
 function attachEventListeners() {
