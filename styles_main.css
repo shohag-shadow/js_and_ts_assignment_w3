@@ -99,7 +99,7 @@
 
 .site-main__image-gallary-circles {
     overflow: hidden;
-    display: flex;
+    display: none;
     align-items: center;
     flex-shrink: 0;
 }
@@ -123,6 +123,7 @@
 
 .site-main__image-gallary-circles__dot.site-main__image-gallary-circles--active {
     background-color: #ffffff;
+
 }
 
 .mobile-pricing {
@@ -130,6 +131,10 @@
 }
 
 @media (max-width: 1023px) {
+    .site-main__image-gallary-circles {
+        display: flex;
+    }
+
     .site-main {
         padding-bottom: 48px;
     }
