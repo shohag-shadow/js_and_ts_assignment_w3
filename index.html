@@ -281,11 +281,17 @@
               2 BEDROOM
               <span aria-hidden="true">⌄</span>
             </button>
-            <select name="query-selector" id="query-selector" class="site-stay__filter">
-              <option value=" most-popular">MOST POPULAR</option>
-              <option value="lowest-price">LOWEST PRICE</option>
-              <option value="highest-price">HIGHEST PRICE</option>
-            </select>
+            <div class="site-stay__dropdown">
+              <button type="button" class="site-stay__filter site-stay__dropdown-trigger" id="query-selector" aria-haspopup="listbox" aria-expanded="false">
+                <span class="site-stay__dropdown-label">MOST POPULAR</span>
+                <span aria-hidden="true"></span>
+              </button>
+              <ul class="site-stay__dropdown-menu" id="query-dropdown-menu" role="listbox" aria-label="Sort stays">
+                <li class="site-stay__dropdown-option site-stay__dropdown-option--selected" role="option" data-query="most-popular" aria-selected="true">MOST POPULAR</li>
+                <li class="site-stay__dropdown-option" role="option" data-query="lowest-price" aria-selected="false">LOWEST PRICE</li>
+                <li class="site-stay__dropdown-option" role="option" data-query="highest-price" aria-selected="false">HIGHEST PRICE</li>
+              </ul>
+            </div>
           </div>
         </div>
 

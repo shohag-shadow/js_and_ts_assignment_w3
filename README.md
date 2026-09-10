@@ -1,59 +1,72 @@
 # Eagle Creek Golf Club Stay and Play
 
-## Project Overview
+A responsive golf-course booking landing page with a Node.js/Express backend that serves property listings and powers the stay & play carousel.
 
-This project is a static, responsive webpage for **Eagle Creek Golf Club, Stay and Play**. It presents a golf course and travel booking experience using HTML and CSS.
+## Prerequisites
 
-The page includes:
+- [Node.js](https://nodejs.org/) 18 or newer (includes `npm`)
+- No other global dependencies — everything is installed via `npm install`
 
-- A header with navigation, search, menu, and booking controls
-- Breadcrumb navigation and a golf course hero section
-- Course images and a responsive image gallery
-- Course details, highlights, reviews, features, and weather information
-- Stay and accommodation information with pricing cards
-- A booking form-style card and nearby golf course recommendations
-- A responsive footer with navigation and destination links
+## Setup
 
-The main page is located in `index.html`. Styling is separated across the CSS files for the header, hero section, main content, payment card, course information, and stay section. Images and icons are stored in the `assets/` directory.
+```bash
+# 1. Install dependencies
+npm install
+```
 
-## Responsive Breakpoints
+```bash
+# 2. (Optional) Configure the Google Maps API key
+cp .env.example .env
+# then edit .env and set:
+# GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+```
 
-The layout uses CSS media queries to adapt the page for desktop, tablet, and mobile screen sizes.
+The app runs without a Maps key — only the map on the stay section is skipped if the key is missing or empty.
 
-### Desktop: 1024px and wider
+## Run the project
 
-- The main content uses a multi-column layout.
-- The image gallery, course information, stay section, and payment card are visible together.
-- The full navigation and desktop footer layout are displayed.
-- Course highlights, reviews, weather seasons, and nearby courses use multiple columns.
+```bash
+npm start
+```
 
-### Tablet: 768px to 1023px
+Then open **http://localhost:3000** in your browser.
 
-- The main content changes to a single-column layout.
-- The side image gallery and desktop payment card are hidden.
-- Mobile pricing cards are displayed below the main gallery.
-- Content such as course highlights and weather seasons is reduced to two columns.
-- The footer changes to a compact grid layout.
+For development with auto-restart on file changes:
 
-### Mobile: 767px and narrower
+```bash
+npm run dev
+```
 
-- Desktop navigation is hidden and a menu icon is shown.
-- The header controls become compact icon-style controls.
-- Course highlights, reviews, features, and nearby courses stack into smaller layouts.
-- Weather seasons are displayed in one column.
-- Mobile pricing cards are simplified to fit narrow screens.
-- The footer links are arranged in two columns.
+## What the server does
 
+The Express server (in `server.js`) runs on port **3000** and:
 
-## Assumptions
+- Serves the static site (`index.html`, `assets/`, CSS, JS) from the project root
+- Loads property data from `data/most_popular.json`, `data/lowest_price.json`, and `data/highest_price.json` into memory at startup
+- Serves gallery images from the `images/` directory
 
-- We assumed that this is a static website.
-- We assumed that JavaScript is not required for the project.
-- The page is intended to demonstrate the visual layout and responsive behavior of a golf booking website rather than provide a complete booking service.
+### API endpoints
 
-## Limitations
+| Endpoint | Description |
+| -------- | ----------- |
+| `GET /get-property?most-popular=true&limit=4` | Property listings, sorted by popularity, lowest price, or highest price (`limit` optional, defaults to 10) |
+| `GET /images` | List of gallery image URLs |
+| `GET /config/maps` | Google Maps API key (from `.env`) |
 
-- Buttons, navigation links, search, filters, pagination, and booking controls are not functional. They are included for visual demonstration only.
-- The website does not include a backend, database, authentication, live availability, or real payment processing.
-- Some icons and visual assets are publicly available or AI-generated rather than original production assets.
-- Since the page is static, its course information, prices, weather details, and recommendations are fixed sample content.
+## Project structure
+
+```
+.
+├── index.html                  # Main page
+├── server.js                   # Express server
+├── queryController.js          # Stay & play cards: filters, carousel, swipe, map
+├── gallaryController.js        # Image gallery + lightbox
+├── popupController.js          # Popup/modal handling
+├── guestSelectorController.js  # Guest selector widget
+├── sidePaymentCardController.js# Booking payment card logic
+├── readMoreController.js       # Read-more / course info toggles
+├── data/                       # Property listing JSON files
+├── images/                     # Gallery images
+├── assets/                     # Icons and static images
+└── styles_*.css                # Per-section stylesheets
+```

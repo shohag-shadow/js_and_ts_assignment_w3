@@ -1,4 +1,7 @@
 const querySelector = document.getElementById("query-selector");
+const queryDropdownMenu = document.getElementById("query-dropdown-menu");
+const queryDropdownOptions = queryDropdownMenu ? [...queryDropdownMenu.querySelectorAll("[data-query]")] : [];
+let selectedQuery = "most-popular";
 const cardWrapper = document.getElementById("stay-card-wrapper");
 const mapElement = document.getElementById("stay-map");
 const favoriteStorageKey = "stay-and-play-favorites";
@@ -22,8 +25,7 @@ function getLimit() {
 }
 
 function querySelectorHandler() {
-    const query = querySelector.value.trim();
-    const queryName = query ? `?${query}=true&limit=${getLimit()}` : `?most-popular=true&limit=${getLimit()}`;
+    const queryName = `?${selectedQuery}=true&limit=${getLimit()}`;
 
     fetch(`/get-property${queryName}`)
         .then(response => {
@@ -260,6 +262,43 @@ cardWrapper.addEventListener("touchend", event => {
     }
 }, { passive: true });
 
-querySelector.addEventListener("change", querySelectorHandler);
+function setDropdownSelection(query) {
+    selectedQuery = query;
+    const label = querySelector?.querySelector(".site-stay__dropdown-label");
+    const option = queryDropdownOptions.find(item => item.dataset.query === query);
+    if (label && option) label.textContent = option.textContent;
+    queryDropdownOptions.forEach(item => {
+        const selected = item.dataset.query === query;
+        item.classList.toggle("site-stay__dropdown-option--selected", selected);
+        item.setAttribute("aria-selected", String(selected));
+    });
+}
+
+function toggleDropdown(open) {
+    if (!querySelector || !queryDropdownMenu) return;
+    const expanded = querySelector.getAttribute("aria-expanded") === "true";
+    const willOpen = open ?? !expanded;
+    querySelector.setAttribute("aria-expanded", String(willOpen));
+    queryDropdownMenu.classList.toggle("site-stay__dropdown-menu--open", willOpen);
+}
+
+function initQueryDropdown() {
+    if (!querySelector || !queryDropdownMenu) return;
+    querySelector.addEventListener("click", () => toggleDropdown());
+    queryDropdownOptions.forEach(option => option.addEventListener("click", () => {
+        setDropdownSelection(option.dataset.query);
+        toggleDropdown(false);
+        querySelectorHandler();
+    }));
+    document.addEventListener("click", event => {
+        if (!event.target.closest(".site-stay__dropdown")) toggleDropdown(false);
+    });
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape") toggleDropdown(false);
+    });
+}
+
+initQueryDropdown();
+setDropdownSelection("most-popular");
 querySelectorHandler();
 loadGoogleMap();
