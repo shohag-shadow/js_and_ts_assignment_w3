@@ -18,7 +18,7 @@ npm install
 # 2. (Optional) Configure the Google Maps API key
 cp .env.example .env
 # then edit .env and set:
-# GOOGLE_MAPS_API_KEY=your_google_maps_api_key_here
+# GOOGLE_MAPS_API_KEY="your_google_maps_api_key_here" (Should be inside quatations)
 ```
 
 The app runs without a Maps key — only the map on the stay section will not work.
